@@ -6,3 +6,5 @@ langchain-community
 pypdf
 streamlit
 langchain-experimental
+langchain_huggingface
+
