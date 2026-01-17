@@ -4,16 +4,16 @@ from typing import TypedDict, List, Dict, Any
 from sqlalchemy import create_engine
 #from langchain_openai import ChatOpenAI
 
+load_dotenv()
+
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 llm = HuggingFaceEndpoint(
-    repo_id="mistralai/Mistral-7B-Instruct-v0.3",
-    huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
+    repo_id="mistralai/Mistral-7B-Instruct-v0.3",  
     temperature=0.1,
     max_new_tokens=512
 )
 
 model = ChatHuggingFace(llm=llm)
-
 
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
@@ -191,6 +191,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
