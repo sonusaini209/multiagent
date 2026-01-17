@@ -10,12 +10,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+# Single reliable model initialization - free inference endpoint
 model = HuggingFaceEndpoint(
-    repo_id="Qwen/Qwen2.5-7B-Instruct",
+    repo_id="mistralai/Mistral-7B-Instruct-v0.3",
     task="conversational",
-    temperature=0.1
+    temperature=0.1,
+    max_new_tokens=1024
 )
-
 
 
 from langchain_community.utilities.sql_database import SQLDatabase
@@ -194,6 +195,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
