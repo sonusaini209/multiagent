@@ -5,9 +5,11 @@ from sqlalchemy import create_engine
 #from langchain_openai import ChatOpenAI
 
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-llm = HuggingFaceEndpoint(
+model = HuggingFaceEndpoint(
     repo_id="mistralai/Mistral-7B-Instruct-v0.3",
+    huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
     temperature=0.1,
+    max_new_tokens=512
 )
 
 model = ChatHuggingFace(llm=llm)
@@ -189,6 +191,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
