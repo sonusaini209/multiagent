@@ -5,11 +5,8 @@ from sqlalchemy import create_engine
 #from langchain_openai import ChatOpenAI
 from langchain_huggingface import HuggingFaceEndpoint
 
-# Replace your old OpenAI initialization with this:
 model = HuggingFaceEndpoint(
-    repo_id="meta-llama/Meta-Llama-3-8B-Instruct", # A very capable free model
-    task="text-generation",
-    huggingfacehub_api_token="your_huggingface_api_token_here",
+    repo_id="mistralai/Mistral-7B-Instruct-v0.3", 
     temperature=0.1
 )
 from langchain_community.utilities.sql_database import SQLDatabase
@@ -188,3 +185,4 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
