@@ -8,9 +8,9 @@ load_dotenv()
 
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 llm = HuggingFaceEndpoint(
-    repo_id="mistralai/Mistral-7B-Instruct-v0.3",  
-    temperature=0.1,
-    max_new_tokens=512
+    repo_id="Qwen/Qwen2.5-7B-Instruct",
+    task="conversational",
+    temperature=0.1
 )
 
 model = ChatHuggingFace(llm=llm)
@@ -191,6 +191,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
