@@ -1,7 +1,9 @@
+
 import os
 import json
 from typing import TypedDict, List, Dict, Any
 from sqlalchemy import create_engine
+
 from dotenv import load_dotenv
 #from langchain_openai import ChatOpenAI
 
@@ -192,6 +194,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
