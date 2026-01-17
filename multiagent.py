@@ -10,13 +10,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-llm = HuggingFaceEndpoint(
+model = HuggingFaceEndpoint(
     repo_id="Qwen/Qwen2.5-7B-Instruct",
     task="conversational",
     temperature=0.1
 )
 
-model = ChatHuggingFace(llm=llm)
+
 
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
@@ -194,6 +194,7 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
 
