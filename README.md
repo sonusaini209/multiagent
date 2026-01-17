@@ -1,29 +1,21 @@
-# OmniLife: Hierarchical Multi-Agent Orchestrator
+# OmniLife: Hierarchical Multi-Agent System
 
-[cite_start]This repository contains a **Hierarchical Multi-Agent System** designed to unify the customer support experience for "OmniLife," a conglomerate with four siloed product databases[cite: 4, 6].
+[cite_start]A system built with LangGraph and OpenAI to unify four siloed product databases (ShopCore, ShipStream, PayGuard, CareDesk)[cite: 1, 4, 6].
 
-## 🚀 Live Demo
-**Render/Streamlit App:** https://multiagent-zplg.onrender.com/
+## ⚙️ How it Works
+1. [cite_start]**Orchestrator**: Parses natural language and decides the sequence of execution[cite: 1, 9].
+2. [cite_start]**Sub-Agents**: Generate SQL queries against isolated SQLite databases and return structured JSON[cite: 1, 10, 55].
+3. [cite_start]**Dependencies**: The system passes OrderIDs and UserIDs between agents to resolve multi-domain queries[cite: 1, 51].
 
-## 🛠️ System Architecture
-[cite_start]The system consists of a **Super Agent (Orchestrator)** and four specialized **Sub-Agents**[cite: 8]:
-- [cite_start]**ShopCore Agent**: Manages user accounts and orders[cite: 14].
-- [cite_start]**ShipStream Agent**: Handles logistics and tracking via OrderID[cite: 21, 28].
-- [cite_start]**PayGuard Agent**: Manages transactions and refunds[cite: 29].
-- [cite_start]**CareDesk Agent**: Tracks support tickets and disputes[cite: 39].
+## 📊 Demo Scenarios
+### Scenario: The Complex Query
+**Query**: "Where is my Gaming Monitor and what is my ticket status?"
+- [cite_start]**Step 1 (ShopCore)**: Found OrderID `5001` for User `1`[cite: 1, 62].
+- [cite_start]**Step 2 (ShipStream)**: Used `5001` to find tracking number `TRK12345`[cite: 1, 63].
+- [cite_start]**Step 3 (CareDesk)**: Found Ticket `801` is "Assigned"[cite: 1, 64].
+- [cite_start]**Synthesized Result**: "Your Gaming Monitor (Order 5001) is in transit (TRK12345) and your support ticket is currently assigned." [cite: 1, 65]
 
-### The "Thought Process"
-The Orchestrator uses **LangGraph** to maintain a state machine. [cite_start]It parses natural language, identifies dependencies (e.g., fetching an OrderID before checking a tracking status), and synthesizes a final answer from structured JSON data[cite: 48, 51, 55].
-
-
-
-## 📊 Database Schema
-The system automatically generates four SQLite databases with synthetic data, ensuring that:
-- [cite_start]**UserID 1** and **OrderID 5001** are linked across all platforms to facilitate complex "Gaming Monitor" queries[cite: 60, 68].
-
-## 💻 Installation & Local Setup
-
-1. **Clone the repo:**
-   ```bash
-   git clone [https://github.com/yourusername/omnilife-multiagent.git](https://github.com/yourusername/omnilife-multiagent.git)
-   cd omnilife-multiagent
+## 🛠️ Installation
+1. Install requirements: `pip install -r requirements.txt`
+2. Add `OPENAI_API_KEY` to a `.env` file.
+3. Run the UI: `streamlit run app.py`
