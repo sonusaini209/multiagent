@@ -33,8 +33,6 @@ The system automatically initializes four isolated relational databases with syn
 ---
 
 
----
-
 ## 💻 Local Setup & Installation
 
 1.  **Clone the Repo:**
