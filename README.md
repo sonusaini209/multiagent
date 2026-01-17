@@ -32,22 +32,6 @@ The system automatically initializes four isolated relational databases with syn
 
 ---
 
-## Demonstration: The "Thought Process" Log
-
-Below is a trace of the Super Agent coordinating sub-agents for a high-complexity query.
-
-### **Query:** *"Where is my Gaming Monitor and what is my ticket status?"*
-
-1.  **Orchestrator Analysis:** Identifying keywords "Gaming Monitor" (ShopCore) and "ticket status" (CareDesk). Realizes it needs an `OrderID` to get tracking (ShipStream).
-2.  **Step 1: ShopCore Agent:** Finds that the "Gaming Monitor" belongs to `Order #5001`.
-    * *Result:* `{"product": "Gaming Monitor", "order_id": 5001, "user_id": 1}`
-3.  **Step 2: ShipStream Agent:** Uses `Order #5001` to fetch logistics data.
-    * *Result:* `{"tracking_no": "TRK12345", "status": "In Transit", "ETA": "2026-01-20"}`
-4.  **Step 3: CareDesk Agent:** Uses `User #1` to check for open tickets.
-    * *Result:* `{"ticket_id": 801, "issue": "Delivery Delay", "status": "Assigned"}`
-5.  **Final Synthesis:** "Your Gaming Monitor (Order #5001) is currently in transit with tracking number TRK12345, expected by Jan 20th. Your support ticket (#801) is already assigned to an agent for review."
-
-
 
 ---
 
