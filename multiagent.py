@@ -8,8 +8,7 @@ from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
 llm = HuggingFaceEndpoint(
     repo_id="meta-llama/Meta-Llama-3-8B-Instruct",
-    task="conversational",
-    huggingfacehub_api_token="your_hf_token_here",
+    task="conversational"
 )
 
 model = ChatHuggingFace(llm=llm)
@@ -191,5 +190,6 @@ workflow = builder.compile()
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
 
 print(result['final_answer'])
+
 
 
