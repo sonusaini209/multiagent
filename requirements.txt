@@ -7,5 +7,6 @@ pypdf
 streamlit
 langchain-experimental
 langchain-huggingface
+langchain-groq
 
 
