@@ -1,16 +1,14 @@
-
 import os
 import json
 from typing import TypedDict, List, Dict, Any
 from sqlalchemy import create_engine
-from dotenv import load_dotenv
-#from langchain_openai import ChatOpenAI
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_openai import ChatOpenAI
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 from langgraph.graph import StateGraph, START, END
 from dotenv import load_dotenv
-
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_groq import ChatGroq
 load_dotenv()
 
 # 1. Define the State
@@ -20,17 +18,16 @@ class AgentState(TypedDict):
     responses: Dict[str, str]
     final_answer: str
 
+
 # 2. Initialize the Model
 #model = ChatOpenAI(temperature=0, model_name="gpt-4")
 
-llm = HuggingFaceEndpoint(
-    repo_id="meta-llama/Meta-Llama-3.1-8B-Instruct",
-    task="conversational",
+model = ChatGroq(
+    groq_api_key=os.getenv("GROQ_API_KEY"),
+    model_name="llama-3.3-70b-versatile",  
     temperature=0.1,
-    max_new_tokens=1536
+    max_tokens=2048
 )
-model = ChatHuggingFace(llm=llm)
-
 import sqlite3
 
 # Define the precise requirements for each database
@@ -64,7 +61,7 @@ for db_name, spec in db_specs.items():
     1. Start with DROP TABLE IF EXISTS for all mentioned tables.
     2. CREATE all 3 tables with appropriate data types.
     3. INSERT exactly 5 rows of synthetic data per table.
-    4. CRITICAL: In all databases, ensure references to UserID 1 and OrderID 5001 (linked to a 'Gaming Monitor').
+    4. CRITICAL: In all databases, ensure references to UserID 1 and OrderID 5001 .
     
     Return ONLY the raw SQL code. No words, no markdown blocks.
     """
@@ -182,20 +179,7 @@ workflow = builder.compile()
 
 # Example Execution
 result = workflow.invoke({"user_query": "I ordered a Gaming Monitor, where is it?"})
-
 print(result['final_answer'])
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
